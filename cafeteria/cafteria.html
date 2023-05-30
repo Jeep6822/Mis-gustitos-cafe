@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Gustitos - Cafetería</title>
+  <link rel="icon" href="download.ico" >
+  <style>
+    /* Estilos CSS para personalizar la página */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    header {
+      background-color: rgb(71, 36, 3);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    section {
+      padding: 20px;
+      text-align: center;
+    }
+    .product {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(71, 36, 3);
+    }
+    .product img {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 10px;
+    }
+    .product h3 {
+      margin: 0;
+    }
+    .product p {
+      margin: 0;
+    }
+    .add-to-cart {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .add-to-cart:hover {
+      background-color: #555;
+    }
+    .remove-from-cart {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #c0392b;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .remove-from-cart:hover {
+      background-color: #e74c3c;
+    }
+    .cart {
+      text-align: right;
+    }
+    .cart-item {
+      display: inline-block;
+      margin: 5px;
+      padding: 5px 10px;
+      background-color: #555;
+      color: #fff;
+      border-radius: 5px;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mis Gustitos</h1>
+    <p>¡Disfruta de nuestros deliciosos sabores!</p>
+  </header>
+
+  <section>
+    <div class="product">
+      <img src="cafe.jpg" alt="Café">
+      <h3>Café</h3>
+      <p>Delicioso café recién hecho.</p>
+      <a href="#" class="add-to-cart" data-product="Café">Agregar al carrito</a>
+    </div>
+    <div class="product">
+      <img src="te.jpg" alt="Té">
+      <h3>Té</h3>
+      <p>Variedad de tés para todos los gustos.</p>
+      <a href="#" class="add-to-cart" data-product="Té">Agregar al carrito</a>
+    </div>
+    <div class="product">
+      <img src="pastel.jpg" alt="Pastel de chocolate">
+      <h3>Pastel de chocolate</h3>
+      <p>Irresistible pastel de chocolate casero.</p>
+      <a href="#" class="add-to-cart" data-product="Pastel de chocolate">Agregar al carrito</a>
+    </div>
+  </section>
+
+  <div class="cart">
+    <h2>Carrito de compras</h2>
+    <div id="cart-items"></div>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Mis Gustitos - Cafetería. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Función para manejar el evento de agregar al carrito
+    function addToCart(event) {
+      event.preventDefault();
+      const product = event.target.getAttribute('data-product');
+      const cartItems = document.getElementById('cart-items');
+      const newItem = document.createElement('div');
+      newItem.classList.add('cart-item');
+      newItem.textContent = product;
+      const removeButton = document.createElement('a');
+      removeButton.href = '#';
+      removeButton.classList.add('remove-from-cart');
+      removeButton.textContent = 'Quitar';
+      removeButton.addEventListener('click', removeFromCart);
+      newItem.appendChild(removeButton);
+      cartItems.appendChild(newItem);
+    }
+
+    // Función para manejar el evento de quitar del carrito
+    function removeFromCart(event) {
+      event.preventDefault();
+      const item = event.target.parentNode;
+      const cartItems = document.getElementById('cart-items');
+      cartItems.removeChild(item);
+    }
+
+    // Agregar el evento de click a los enlaces de agregar al carrito
+    const addToCartLinks = document.querySelectorAll('.add-to-cart');
+    addToCartLinks.forEach(function(link) {
+      link.addEventListener('click', addToCart);
+    });
+  </script>
+</body>
+</html>
